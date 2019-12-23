@@ -66,5 +66,12 @@ func (t TimeIt) stdDev() float64 {
 
 // Show prints out the current summary of the recorded timings
 func (t TimeIt) Show() {
-	fmt.Printf("%.2f s ± %d ms per loop (mean ± std. dev. of %d runs, 1 loop each)\n", t.mean(), int(t.stdDev()*1000), t.iter)
+	fmt.Printf("%s ± %s per loop (mean ± std. dev. of %d runs, 1 loop each)\n", printTime(t.mean()), printTime(t.stdDev()), t.iter)
+}
+
+func printTime(t float64) string {
+	if t < 1 {
+		return fmt.Sprintf("%d ms", int(t*1000))
+	}
+	return fmt.Sprintf("%.2f s", t)
 }

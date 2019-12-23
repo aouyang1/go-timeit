@@ -14,7 +14,7 @@ func Example() {
 	t.Show()
 
 	// Output:
-	// 0.24 s ± 0 ms per loop (mean ± std. dev. of 10 runs, 1 loop each)
+	// 234 ms ± 0 ms per loop (mean ± std. dev. of 10 runs, 1 loop each)
 }
 
 func myFunc() {
