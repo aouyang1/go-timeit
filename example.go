@@ -1,13 +1,11 @@
-package main
+package timeit
 
 import (
 	"time"
-
-	"github.com/aouyang1/go-timeit"
 )
 
-func main() {
-	t := timeit.New()
+func Example() {
+	t := New()
 	for i := 0; i < 10; i++ {
 		t.Tic()
 		myFunc()
