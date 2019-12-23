@@ -22,14 +22,14 @@ $ go get -u github.com/aouyang1/go-timeit
 package main
 
 import (
-	"fmt"
+  "fmt"
   "time"
 
-	"github.com/aouyang1/go-timeit"
+  "github.com/aouyang1/go-timeit"
 )
 
 func main() {
-	t := timeit.New()
+  t := timeit.New()
   for i := 0; i < 10; i++ {
     t.Tic()
     myFunc()

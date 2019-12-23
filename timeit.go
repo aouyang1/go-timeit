@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// TimeIt keeps track of the running mean and sum of squares for a series of time measurements
 type TimeIt struct {
 	start   time.Time
 	oldMean float64
@@ -14,10 +15,12 @@ type TimeIt struct {
 	iter    int
 }
 
+// New creates a new TimeIt struct that will hold state of all time measurements
 func New() TimeIt {
 	return TimeIt{}
 }
 
+// Reset resets the timit struct to be used again without having to reallocate a new struct
 func (t *TimeIt) Reset() {
 	t.start = time.Time{}
 	t.oldMean = 0
@@ -27,10 +30,12 @@ func (t *TimeIt) Reset() {
 	t.iter = 0
 }
 
+// Tic starts the timer for the current measurement
 func (t *TimeIt) Tic() {
 	t.start = time.Now()
 }
 
+// Toc adds a time delta from the last tic to the timeit summary
 func (t *TimeIt) Toc() {
 	t.iter++
 	td := time.Now().Sub(t.start).Seconds()
@@ -45,20 +50,21 @@ func (t *TimeIt) Toc() {
 	}
 }
 
-func (t TimeIt) Mean() float64 {
+func (t TimeIt) mean() float64 {
 	if t.iter == 0 {
 		return 0
 	}
 	return t.newMean
 }
 
-func (t TimeIt) StdDev() float64 {
+func (t TimeIt) stdDev() float64 {
 	if t.iter <= 1 {
 		return 0
 	}
 	return t.newSS / float64(t.iter-1)
 }
 
+// Show prints out the current summary of the recorded timings
 func (t TimeIt) Show() {
-	fmt.Printf("%.2f s ± %d ms per loop (mean ± std. dev. of %d runs, 1 loop each)\n", t.Mean(), int(t.StdDev()*1000), t.iter)
+	fmt.Printf("%.2f s ± %d ms per loop (mean ± std. dev. of %d runs, 1 loop each)\n", t.mean(), int(t.stdDev()*1000), t.iter)
 }
