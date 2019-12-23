@@ -22,7 +22,6 @@ $ go get -u github.com/aouyang1/go-timeit
 package main
 
 import (
-  "fmt"
   "time"
 
   "github.com/aouyang1/go-timeit"
