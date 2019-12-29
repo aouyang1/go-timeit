@@ -70,11 +70,14 @@ func (t TimeIt) Show() {
 }
 
 func printTime(t float64) string {
-	if t < 0.001 {
-		return fmt.Sprintf("%d µs", int(t*1000000))
+	if t < 1e-6 {
+		return fmt.Sprintf("%.2f ns", t*1e9)
+	}
+	if t < 1e-3 {
+		return fmt.Sprintf("%.2f µs", t*1e6)
 	}
 	if t < 1 {
-		return fmt.Sprintf("%d ms", int(t*1000))
+		return fmt.Sprintf("%.2f ms", t*1e3)
 	}
 	return fmt.Sprintf("%.2f s", t)
 }
